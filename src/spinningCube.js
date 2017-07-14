@@ -79,7 +79,7 @@
     render(renderer){
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        renderer.shadowMapCullFace = THREE.CullFaceBack;
+        renderer.shadowMap.renderReverseSided = false;
         super.render(renderer);
       }
 
