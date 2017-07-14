@@ -63,15 +63,37 @@
       var pointLightHelper = new THREE.PointLightHelper(this.anotherLight, 2);
       this.scene.add(this.anotherLight);
 
+      // this.spotlightOverheadForAmbientLight = new THREE.SpotLight( 0xfefefe );
+      // this.spotlightOverheadForAmbientLight.castShadow = false;
+      // this.spotlightOverheadForAmbientLight.position.set(5,5,0);
+      // this.spotlightOverheadForAmbientLight.target = this.floorCube;
+      // this.scene.add(this.spotlightOverheadForAmbientLight);
+
       // The light that casts shadow.
-      var light = new THREE.SpotLight( 0xffffff );
-      light.castShadow = true;
-      // light.position.set(0.5,0.5,0.5);
-      light.position.set(0,1.5,0);
-      light.shadow.mapSize.width = 1024;
-      light.shadow.mapSize.height = 1024;
-      light.target = this.floorCube;
-      this.scene.add(light);
+      this.spotLightInside = new THREE.SpotLight( 0xffffff );
+      this.spotLightInside.castShadow = true;
+      this.spotLightInside.position.set(0,0.4,0);
+      this.spotLightInside.shadow.mapSize.width = 1024;
+      this.spotLightInside.shadow.mapSize.height = 1024;
+      this.spotLightInside.target = this.floorCube;
+      this.scene.add(this.spotLightInside);
+
+
+      this.firstColoredSpotlight = new THREE.SpotLight( 0xff0000 );
+      this.firstColoredSpotlight.castShadow = true;
+      this.firstColoredSpotlight.position.set(0,0.3,0);
+      this.firstColoredSpotlight.shadow.mapSize.width = 1024;
+      this.firstColoredSpotlight.shadow.mapSize.height = 1024;
+      this.firstColoredSpotlight.target = this.floorCube;
+      this.scene.add(this.firstColoredSpotlight);
+
+      this.secondColoredSpotlight = new THREE.SpotLight( 0x808000 );
+      this.secondColoredSpotlight.castShadow = true;
+      this.secondColoredSpotlight.position.set(0.5,0.5,-0.2);
+      this.secondColoredSpotlight.shadow.mapSize.width = 1024;
+      this.secondColoredSpotlight.shadow.mapSize.height = 1024;
+      this.secondColoredSpotlight.target = this.floorCube;
+      this.scene.add(this.secondColoredSpotlight);
 
       this.camera.position.z = 10;
     }
@@ -85,10 +107,22 @@
 
     update(frame) {
       super.update(frame);
-      this.lampModel.rotation.x = Math.cos(frame / 10);
+      // this.lampModel.rotation.x = Math.cos(frame / 20);
+      // Math.PI/5 ~ 0.628
       this.floorCube.needsUpdate = true;
-      //this.cube.rotation.x = Math.sin(frame / 10);
-      //this.cube.rotation.y = Math.cos(frame / 10);
+      this.spotLightInside.position.x = 0.9 * Math.sin(frame/50);
+      this.spotLightInside.position.y = 0.628 * Math.abs(Math.cos(frame/50)) + 0.25;
+      this.spotLightInside.position.z = 0.628 * Math.cos(frame/50);
+
+      this.firstColoredSpotlight.position.x = 0.9 * Math.cos(frame/66) + 0.5;
+      this.firstColoredSpotlight.position.y = 0.628 * Math.abs(Math.sin(frame/66)) + 0.25;
+      this.firstColoredSpotlight.position.z = 0.628 * Math.cos(frame/66);
+
+      this.secondColoredSpotlight.position.x = 0.9 * Math.cos(frame/59) - 0.5;
+      this.secondColoredSpotlight.position.y = 0.628 * Math.abs(Math.sin(frame/59)) + 0.25;
+      this.secondColoredSpotlight.position.z = 0.628 * Math.cos(frame/59) + 0.5;
+      // this.cube.rotation.x = Math.sin(frame / 10);
+      // this.cube.rotation.y = Math.cos(frame / 10);
     }
   }
 
