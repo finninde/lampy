@@ -54,17 +54,20 @@
 
 
 
-      this.anotherLight = new THREE.PointLight(0xffffff, 1, 5, 2);
-      this.anotherLight.position.set(0,0,0);
-      this.anotherLight.physicallyCorrectLights = true;
-      this.anotherLight.castShadow = true;
-      var pointLightHelper = new THREE.PointLightHelper(this.anotherLight, 2);
-      this.scene.add(this.anotherLight);
+      // this.anotherLight = new THREE.PointLight(0xffffff, 1, 5, 2);
+      // this.anotherLight.position.set(0,0,0);
+      // this.anotherLight.physicallyCorrectLights = true;
+      // this.anotherLight.castShadow = true;
+      // var pointLightHelper = new THREE.PointLightHelper(this.anotherLight, 2);
+      // this.scene.add(this.anotherLight);
 
-      // var light = new THREE.SpotLight( 0xffffff );
-      // light.castShadow = true;
-      // light.position.set(0.5,0.5,-0.5);
-      // this.scene.add( light );
+      var light = new THREE.SpotLight( 0xffffff );
+      light.castShadow = true;
+      // light.position.set(0.5,0.5,0.5);
+      light.position.set(0,2,0);
+      light.shadow.mapSize.width = 1024;
+      light.shadow.mapSize.height = 1024;
+      this.scene.add(light);
 
       this.camera.position.z = 10;
     }
