@@ -7,7 +7,9 @@
         }
       });
 
+
       this.lampModel = new THREE.Object3D();
+
       var loadObject = function (objPath, material, three_object) {
         var objLoader = new THREE.OBJLoader();
         Loader.loadAjax(objPath, function(text) {
@@ -61,11 +63,17 @@
 
       // var light = new THREE.SpotLight( 0xffffff );
       // light.castShadow = true;
-      // light.position.set(0,0,0);
+      // light.position.set(0.5,0.5,-0.5);
       // this.scene.add( light );
 
       this.camera.position.z = 10;
     }
+
+    render(renderer){
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        super.render(renderer);
+      }
 
     update(frame) {
       super.update(frame);
